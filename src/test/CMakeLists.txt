@@ -10,3 +10,4 @@ function(simpleTest name)
 endfunction()
 
 simpleTest("TestTupleToVector")
+simpleTest("TestTupleUtilities")
