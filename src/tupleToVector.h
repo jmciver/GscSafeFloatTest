@@ -1,0 +1,4 @@
+#ifndef gsc_boost_safeFloat_tupleToVector_h
+#define gsc_boost_safeFloat_tupleToVector_h
+
+#endif // gsc_boost_safeFloat_tupleToVector_h
