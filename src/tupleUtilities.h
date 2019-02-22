@@ -9,7 +9,7 @@ struct TuplePrinter
 {
   static void print( std::ostream& stream, const Tuple& tuple )
   {
-    TuplePrinter<Tuple, N-1>::print( tuple );
+    TuplePrinter<Tuple, N-1>::print( stream, tuple );
     stream << ", " << std::get<N-1>( tuple );
   }
 };
