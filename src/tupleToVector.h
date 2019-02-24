@@ -27,7 +27,7 @@ struct TupleElementToVector<Tuple, 1>
 template <class Tuple>
 struct TupleElementToVector<Tuple, 0>
 {
-  static auto build( const std::size_t size, const Tuple& tuple )
+  static auto build( const std::size_t, const Tuple& tuple )
   {
     return std::make_tuple();
   }
