@@ -51,3 +51,12 @@ BOOST_AUTO_TEST_CASE( testOneElement )
   BOOST_CHECK( "((b, b))" == toTupleOfVectors( 2, std::make_tuple( "b" ) ) );
   BOOST_CHECK( "((c, c, c))" == toTupleOfVectors( 3, std::make_tuple( "c" ) ) );
 }
+
+BOOST_AUTO_TEST_CASE( testTwoElements )
+{
+  BOOST_CHECK( "((1), (2))" == toTupleOfVectors( 1, std::make_tuple( 1, 2 ) ) );
+  BOOST_CHECK( "((1, 1), (2, 2))" == toTupleOfVectors( 2, std::make_tuple( 1, 2 ) ) );
+  BOOST_CHECK( "((top, top), (10, 10), (3.14, 3.14))" == toTupleOfVectors(
+    2,
+    std::make_tuple( "top", 10, 3.14 ) ) );
+}

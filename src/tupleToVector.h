@@ -4,10 +4,18 @@
 #include <tuple>
 #include <vector>
 
-template<class Tuple, std::size_t size>
-struct TupleElementToVector;
+template <class Tuple, std::size_t N>
+struct TupleElementToVector
+{
+  static auto build( const std::size_t size, const Tuple& tuple )
+  {
+    return std::tuple_cat(
+      TupleElementToVector<Tuple, N-1>::build( size, tuple ),
+      std::make_tuple( std::vector( size, std::get<N-1>( tuple ) ) ) );
+  }
+};
 
-template<class Tuple>
+template <class Tuple>
 struct TupleElementToVector<Tuple, 1>
 {
   static auto build( const std::size_t size, const Tuple& tuple )
@@ -16,7 +24,7 @@ struct TupleElementToVector<Tuple, 1>
   }
 };
 
-template<class Tuple>
+template <class Tuple>
 struct TupleElementToVector<Tuple, 0>
 {
   static auto build( const std::size_t size, const Tuple& tuple )
@@ -25,7 +33,7 @@ struct TupleElementToVector<Tuple, 0>
   }
 };
 
-template<class... Args>
+template <class... Args>
 auto toTupleOfVectors( const std::size_t size, const std::tuple<Args...>& tuple )
 {
   return TupleElementToVector<decltype( tuple ), sizeof...(Args)>::build( size, tuple );
