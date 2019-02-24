@@ -34,6 +34,14 @@ std::ostream& operator<< ( std::ostream& stream, const std::vector< T >& vector 
   return stream;
 }
 
+BOOST_AUTO_TEST_CASE( testZeroElement )
+{
+  const std::string expectedValue { "()" };
+  BOOST_CHECK( expectedValue == toTupleOfVectors( 1, std::tuple<>() ) );
+  BOOST_CHECK( expectedValue == toTupleOfVectors( 2, std::tuple<>() ) );
+  BOOST_CHECK( expectedValue == toTupleOfVectors( 3, std::tuple<>() ) );
+}
+
 BOOST_AUTO_TEST_CASE( testOneElement )
 {
   BOOST_CHECK( "((1))" == toTupleOfVectors( 1, std::make_tuple( 1 ) ) );

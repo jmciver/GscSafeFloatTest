@@ -16,6 +16,15 @@ struct TupleElementToVector<Tuple, 1>
   }
 };
 
+template<class Tuple>
+struct TupleElementToVector<Tuple, 0>
+{
+  static auto build( const std::size_t size, const Tuple& tuple )
+  {
+    return std::make_tuple();
+  }
+};
+
 template<class... Args>
 auto toTupleOfVectors( const std::size_t size, const std::tuple<Args...>& tuple )
 {
