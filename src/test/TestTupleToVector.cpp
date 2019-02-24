@@ -47,4 +47,7 @@ BOOST_AUTO_TEST_CASE( testOneElement )
   BOOST_CHECK( "((1))" == toTupleOfVectors( 1, std::make_tuple( 1 ) ) );
   BOOST_CHECK( "((2, 2))" == toTupleOfVectors( 2, std::make_tuple( 2 ) ) );
   BOOST_CHECK( "((3, 3, 3))" == toTupleOfVectors( 3, std::make_tuple( 3 ) ) );
+  BOOST_CHECK( "((a))" == toTupleOfVectors( 1, std::make_tuple( "a" ) ) );
+  BOOST_CHECK( "((b, b))" == toTupleOfVectors( 2, std::make_tuple( "b" ) ) );
+  BOOST_CHECK( "((c, c, c))" == toTupleOfVectors( 3, std::make_tuple( "c" ) ) );
 }
