@@ -20,10 +20,10 @@ std::string convertVectorToString( const std::vector< T >& vector )
     begin( vector ),
     end( vector ),
     std::back_inserter( vectorAsStrings ),
-      []( const T& item ) {
-        std::ostringstream stream;
-        stream << item;
-        return stream.str(); } );
+    []( const T& item ) {
+      std::ostringstream stream;
+      stream << item;
+      return stream.str(); } );
   return boost::algorithm::join( vectorAsStrings, ", " );
 }
 
