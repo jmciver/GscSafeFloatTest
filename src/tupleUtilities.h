@@ -36,17 +36,17 @@ struct TuplePrinter<Tuple, 0>
 template <class... Args>
 std::ostream& operator<< ( std::ostream& stream,  const std::tuple<Args...>& tuple )
 {
-  stream << "(";
+  stream << "{";
   TuplePrinter<decltype( tuple ), sizeof...(Args)>::print( stream, tuple );
-  stream << ")";
+  stream << "}";
   return stream;
 }
 
 std::ostream& operator<< ( std::ostream& stream,  const std::tuple<>& tuple )
 {
-  stream << "(";
+  stream << "{";
   TuplePrinter<decltype( tuple ), 0>::print( stream, tuple );
-  stream << ")";
+  stream << "}";
   return stream;
 }
 

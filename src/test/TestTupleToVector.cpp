@@ -30,13 +30,13 @@ std::string convertVectorToString( const std::vector< T >& vector )
 template <class T>
 std::ostream& operator<< ( std::ostream& stream, const std::vector< T >& vector )
 {
-  stream << "(" << convertVectorToString( vector ) << ")";
+  stream << "{" << convertVectorToString( vector ) << "}";
   return stream;
 }
 
 BOOST_AUTO_TEST_CASE( testZeroElement )
 {
-  const std::string expectedValue { "()" };
+  const std::string expectedValue { "{}" };
   BOOST_CHECK( expectedValue == toTupleOfVectors( 1, std::tuple<>() ) );
   BOOST_CHECK( expectedValue == toTupleOfVectors( 2, std::tuple<>() ) );
   BOOST_CHECK( expectedValue == toTupleOfVectors( 3, std::tuple<>() ) );
@@ -44,19 +44,19 @@ BOOST_AUTO_TEST_CASE( testZeroElement )
 
 BOOST_AUTO_TEST_CASE( testOneElement )
 {
-  BOOST_CHECK( "((1))" == toTupleOfVectors( 1, std::make_tuple( 1 ) ) );
-  BOOST_CHECK( "((2, 2))" == toTupleOfVectors( 2, std::make_tuple( 2 ) ) );
-  BOOST_CHECK( "((3, 3, 3))" == toTupleOfVectors( 3, std::make_tuple( 3 ) ) );
-  BOOST_CHECK( "((a))" == toTupleOfVectors( 1, std::make_tuple( "a" ) ) );
-  BOOST_CHECK( "((b, b))" == toTupleOfVectors( 2, std::make_tuple( "b" ) ) );
-  BOOST_CHECK( "((c, c, c))" == toTupleOfVectors( 3, std::make_tuple( "c" ) ) );
+  BOOST_CHECK( "{{1}}" == toTupleOfVectors( 1, std::make_tuple( 1 ) ) );
+  BOOST_CHECK( "{{2, 2}}" == toTupleOfVectors( 2, std::make_tuple( 2 ) ) );
+  BOOST_CHECK( "{{3, 3, 3}}" == toTupleOfVectors( 3, std::make_tuple( 3 ) ) );
+  BOOST_CHECK( "{{a}}" == toTupleOfVectors( 1, std::make_tuple( "a" ) ) );
+  BOOST_CHECK( "{{b, b}}" == toTupleOfVectors( 2, std::make_tuple( "b" ) ) );
+  BOOST_CHECK( "{{c, c, c}}" == toTupleOfVectors( 3, std::make_tuple( "c" ) ) );
 }
 
 BOOST_AUTO_TEST_CASE( testTwoElements )
 {
-  BOOST_CHECK( "((1), (2))" == toTupleOfVectors( 1, std::make_tuple( 1, 2 ) ) );
-  BOOST_CHECK( "((1, 1), (2, 2))" == toTupleOfVectors( 2, std::make_tuple( 1, 2 ) ) );
-  BOOST_CHECK( "((top, top), (10, 10), (3.14, 3.14))" == toTupleOfVectors(
+  BOOST_CHECK( "{{1}, {2}}" == toTupleOfVectors( 1, std::make_tuple( 1, 2 ) ) );
+  BOOST_CHECK( "{{1, 1}, {2, 2}}" == toTupleOfVectors( 2, std::make_tuple( 1, 2 ) ) );
+  BOOST_CHECK( "{{top, top}, {10, 10}, {3.14, 3.14}}" == toTupleOfVectors(
     2,
     std::make_tuple( "top", 10, 3.14 ) ) );
 }

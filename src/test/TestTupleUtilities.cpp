@@ -10,17 +10,17 @@
 BOOST_AUTO_TEST_CASE( testPrintEmpty )
 {
   const std::tuple<> empty;
-  BOOST_CHECK( "()" == empty );
+  BOOST_CHECK( "{}" == empty );
 }
 
 BOOST_AUTO_TEST_CASE( testPrintOne )
 {
   const std::tuple<int> testTuple { std::make_tuple( 123 ) };
-  BOOST_CHECK( "(123)" == testTuple );
+  BOOST_CHECK( "{123}" == testTuple );
 }
 
 BOOST_AUTO_TEST_CASE( testPrintTwo )
 {
   auto testTuple = std::make_tuple( 123, "polymer" );
-  BOOST_CHECK( "(123, polymer)" == testTuple );
+  BOOST_CHECK( "{123, polymer}" == testTuple );
 }
