@@ -59,4 +59,7 @@ BOOST_AUTO_TEST_CASE( testTwoElements )
   BOOST_CHECK( "{{top, top}, {10, 10}, {3.14, 3.14}}" == toTupleOfVectors(
     2,
     std::make_tuple( "top", 10, 3.14 ) ) );
+  BOOST_CHECK( "{{1, 1}, {1.1, 1.1}, {a, a}}" == toTupleOfVectors(
+    2,
+    std::make_tuple( 1, 1.1, 'a' ) ) );
 }
