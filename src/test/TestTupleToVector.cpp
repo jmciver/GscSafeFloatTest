@@ -63,3 +63,14 @@ BOOST_AUTO_TEST_CASE( testTwoElements )
     2,
     std::make_tuple( 1, 1.1, 'a' ) ) );
 }
+
+BOOST_AUTO_TEST_CASE( testTupleOfVectors )
+{
+  BOOST_CHECK(
+    "{{{1, 2, 3}, {1, 2, 3}}, {{a, b, c}, {a, b, c}}}" ==
+    toTupleOfVectors(
+      2,
+      std::make_tuple(
+        std::vector<int>( { 1, 2, 3 } ),
+        std::vector<char>( { 'a', 'b', 'c' } ) ) ) );
+}
