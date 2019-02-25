@@ -11,3 +11,4 @@ endfunction()
 
 simpleTest("TestTupleToVector")
 simpleTest("TestTupleUtilities")
+simpleTest("TestTupleGetVector")
