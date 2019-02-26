@@ -5,7 +5,9 @@
 #include <vector>
 
 template <std::size_t Index, class... Types>
-typename std::tuple_element<Index, std::tuple<Types...> >::type& getVector( std::tuple<Types...>& tuple )
+typename std::vector<
+  typename std::tuple_element<Index, std::tuple<Types...>>::type::value_type >&
+  getVector( std::tuple<Types...>& tuple )
 {
   return std::get<Index>( tuple );
 }
