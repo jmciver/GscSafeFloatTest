@@ -3,11 +3,9 @@
 #define BOOST_TEST_MODULE TestTupleGetVector
 #include <boost/test/unit_test.hpp>
 
-#include <tupleToVector.h>
 #include <tupleGetVector.h>
+#include <tupleToVector.h>
 #include <tupleUtilities.h>
-
-#include <iostream>
 
 BOOST_AUTO_TEST_CASE( tupleOfTwoElementVectors )
 {

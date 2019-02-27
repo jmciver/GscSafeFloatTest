@@ -1,8 +1,8 @@
 #ifndef gsc_boost_safeFloat_tupleGetVector_h
 #define gsc_boost_safeFloat_tupleGetVector_h
 
-#include <tuple>
 #include <type_traits>
+#include <tuple>
 #include <vector>
 
 template <class T>
