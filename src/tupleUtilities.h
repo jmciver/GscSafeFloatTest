@@ -10,7 +10,7 @@
 template <class T>
 std::string convertVectorToString( const std::vector< T >& vector )
 {
-  std::vector< std::string > vectorAsStrings;
+  std::vector<std::string> vectorAsStrings;
   std::transform(
     begin( vector ),
     end( vector ),
