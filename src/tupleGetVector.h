@@ -20,7 +20,7 @@ struct IsVectorType<std::vector<T>>
 template <std::size_t Index>
 struct CheckTupleOfVectorsImpl
 {
-  template<class... Elements>
+  template <class... Elements>
   static void apply( const std::tuple<Elements...>& tuple )
   {
     static_assert(
@@ -33,7 +33,7 @@ struct CheckTupleOfVectorsImpl
 template <>
 struct CheckTupleOfVectorsImpl<1>
 {
-  template<class... Elements>
+  template <class... Elements>
   static void apply( const std::tuple<Elements...>& )
   {
     static_assert(
@@ -45,15 +45,11 @@ struct CheckTupleOfVectorsImpl<1>
 template <std::size_t Index, class... Elements>
 auto& getVector( std::tuple<Elements...>& tuple )
 {
-  CheckTupleOfVectorsImpl<sizeof...(Elements)>::apply( tuple );
+  static_assert(
+    sizeof... ( Elements ) > 0,
+    "attempting to call getVector using empty tuple" );
+  CheckTupleOfVectorsImpl<sizeof... ( Elements )>::apply( tuple );
   return std::get<Index>( tuple );
 }
-
-//template <std::size_t Index>
-//auto& getVector( std::tuple<>& tuple )
-//{
-//  static_assert( false, "attempting to call getVector using empty tuple" );
-//  return std::get<Index>( tuple );
-//}
 
 #endif // gsc_boost_safeFloat_tupleGetVector_h
