@@ -5,7 +5,8 @@
 
 #include <tupleGetVector.h>
 #include <tupleToVector.h>
-#include <tupleUtilities.h>
+
+#include <test/testHelpers.h>
 
 BOOST_AUTO_TEST_CASE( tupleOfTwoElementVectors )
 {

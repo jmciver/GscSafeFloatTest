@@ -74,19 +74,4 @@ std::ostream& operator<< ( std::ostream& stream,  const std::tuple<>& tuple )
   return stream;
 }
 
-template <class... Args>
-bool operator== ( const std::string& lhs, const std::tuple<Args...>& rhs )
-{
-  std::ostringstream stream;
-  stream << rhs;
-  return lhs.compare( stream.str() ) == 0 ? true : false;
-}
-
-bool operator== ( const std::string& lhs, const std::tuple<>& rhs )
-{
-  std::ostringstream stream;
-  stream << rhs;
-  return lhs.compare(stream.str()) == 0 ? true : false;
-}
-
 #endif // gsc_boost_safeFloat_tupleUtilities_h

@@ -4,11 +4,10 @@
 #include <boost/test/unit_test.hpp>
 
 #include <tupleToVector.h>
-#include <tupleUtilities.h>
 
-#include <sstream>
-#include <string>
-#include <vector>
+#include <test/testHelpers.h>
+
+#include <tuple>
 
 BOOST_AUTO_TEST_CASE( testZeroElement )
 {
