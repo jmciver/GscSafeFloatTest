@@ -33,10 +33,10 @@ struct TupleElementToVector<Tuple, 0>
   }
 };
 
-template <class... Args>
-auto toTupleOfVectors( const std::size_t size, const std::tuple<Args...>& tuple )
+template <class... Elements>
+auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tuple )
 {
-  return TupleElementToVector<decltype( tuple ), sizeof...(Args)>::build( size, tuple );
+  return TupleElementToVector<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
 }
 
 #endif // gsc_boost_safeFloat_tupleToVector_h
