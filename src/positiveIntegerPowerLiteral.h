@@ -1,8 +1,6 @@
 #ifndef gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
 #define gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
 
-#include <boost/numeric/conversion/cast.hpp>
-
 #include <cmath>
 #include <stdexcept>
 
