@@ -12,20 +12,20 @@ constexpr float checkedConversionToFloat( const long double value )
     valueAsFloat;
 }
 
-constexpr float raiseBaseTo( const float base, const int exponent )
+constexpr float power( const float base, const int exponent )
 {
   return std::pow( base, static_cast<float>( exponent ) );
 }
 
 constexpr bool isIntegerPowerOfBase( const float value, const float base )
 {
-  auto power { 1 };
-  auto powerOf0p5 { raiseBaseTo( base, power ) };
-  while ( std::isnormal( powerOf0p5 ) ) {
-    if ( powerOf0p5 == value ) {
+  auto exponent { 1 };
+  auto result { power( base, exponent ) };
+  while ( std::isnormal( result ) ) {
+    if ( result == value ) {
       return true;
     }
-    powerOf0p5 = raiseBaseTo( base, ++power );
+    result = power( base, ++exponent );
   }
   return false;
 }
