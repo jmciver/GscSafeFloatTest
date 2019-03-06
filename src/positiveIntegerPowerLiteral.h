@@ -10,19 +10,15 @@
 
 constexpr const float kPositivePowerInteger { 0.5f };
 
-constexpr bool isInRangeOfFloat( long double value )
+float valueCannotBeConvertedToFloatError( float value )
 {
-  const auto floatMax { static_cast<long double>( std::numeric_limits<float>::max() ) };
-  const auto floatMin { static_cast<long double>( std::numeric_limits<float>::min() ) };
-  return floatMax >= value && value >= floatMin ? true : false;
+  return value;
 }
 
 constexpr float checkedConversionToFloat( long double value )
 {
-  if ( ! isInRangeOfFloat( value ) ) {
-     throw std::logic_error( "value cannot be represented as a float" );
-  }
-  return static_cast<float>( value );
+  const float valueAsFloat { static_cast<float>( value ) };
+  return std::isinf( valueAsFloat ) == false ? valueAsFloat : valueCannotBeConvertedToFloatError( 0.0 );
 }
 
 constexpr float halfRaisedTo( int exponent )
