@@ -10,43 +10,38 @@
 
 constexpr const float kPositivePowerInteger { 0.5f };
 
-float valueCannotBeConvertedToFloatError( float value )
-{
-  return value;
-}
-
 constexpr float checkedConversionToFloat( long double value )
 {
   const float valueAsFloat { static_cast<float>( value ) };
-  return std::isinf( valueAsFloat ) == false ? valueAsFloat : valueCannotBeConvertedToFloatError( 0.0 );
+  return std::isinf( valueAsFloat ) ?
+    throw std::logic_error( "value of type long double cannot be converted to type float" ) :
+    valueAsFloat;
 }
 
-constexpr float halfRaisedTo( int exponent )
+constexpr float oneHalfRaisedTo( int exponent )
 {
-  std::feclearexcept( FE_ALL_EXCEPT );
   return std::pow( kPositivePowerInteger, static_cast<float>( exponent ) );
 }
 
-constexpr bool isDivisableByPowerOfHalf( const float dividend )
+constexpr bool isIntegerPowerOfOneHalf( const float value )
 {
   int power { 1 };
-  float divisor { halfRaisedTo( power ) };
-  while ( ! std::fetestexcept( FE_UNDERFLOW ) ) {
-    if ( std::fmod( dividend, divisor ) == 0.0f ) {
+  float powerOf0p5 { oneHalfRaisedTo( power ) };
+  while ( std::isnormal( powerOf0p5 ) ) {
+    if ( powerOf0p5 == value ) {
       return true;
     }
-    divisor = halfRaisedTo( ++power );
+    powerOf0p5 = oneHalfRaisedTo( ++power );
   }
   return false;
 }
 
-constexpr float operator"" _pipl( long double dividend )
+constexpr float operator"" _pip0p5( long double dividend )
 {
   float dividendAsFloat { checkedConversionToFloat( dividend ) };
-  if ( ! isDivisableByPowerOfHalf( dividendAsFloat ) ) {
-    throw std::logic_error( "dividend is not divisable by 0.5f to an integer power" );
-  }
-  return dividendAsFloat;
+  return isIntegerPowerOfOneHalf( dividendAsFloat ) ?
+    dividendAsFloat :
+    throw std::logic_error( "value is not integer power of 0.5f" );
 }
 
 #endif // gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
