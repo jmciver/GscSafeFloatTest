@@ -3,10 +3,8 @@
 
 #include <boost/numeric/conversion/cast.hpp>
 
-#include <cfenv>
 #include <cmath>
-#include <iostream>
-#include <limits>
+#include <stdexcept>
 
 constexpr float checkedConversionToFloat( const long double value )
 {
