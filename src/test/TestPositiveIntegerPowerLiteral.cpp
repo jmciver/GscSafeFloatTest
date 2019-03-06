@@ -50,7 +50,7 @@ BOOST_AUTO_TEST_CASE( testConstexpr )
 BOOST_AUTO_TEST_CASE( testCastingFromLongDoubleToFloat )
 {
   constexpr float value1 = checkedConversionToFloat( std::numeric_limits<float>::max() );
-  BOOST_CHECK( value1 > 0 );
+  BOOST_CHECK( value1 > 0.0f );
   constexpr float value2 = checkedConversionToFloat( -std::numeric_limits<float>::max() );
-  BOOST_CHECK( value2 < 0 );
+  BOOST_CHECK( value2 < 0.0f );
 }
