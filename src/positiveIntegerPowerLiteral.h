@@ -8,39 +8,39 @@
 #include <iostream>
 #include <limits>
 
-constexpr const float kPositivePowerInteger { 0.5f };
+constexpr float kBase { 0.5f };
 
 constexpr float checkedConversionToFloat( long double value )
 {
-  const float valueAsFloat { static_cast<float>( value ) };
+  const auto valueAsFloat { static_cast<float>( value ) };
   return std::isinf( valueAsFloat ) ?
     throw std::logic_error( "value of type long double cannot be converted to type float" ) :
     valueAsFloat;
 }
 
-constexpr float oneHalfRaisedTo( int exponent )
+constexpr float raiseBaseTo( int exponent )
 {
-  return std::pow( kPositivePowerInteger, static_cast<float>( exponent ) );
+  return std::pow( kBase, static_cast<float>( exponent ) );
 }
 
-constexpr bool isIntegerPowerOfOneHalf( const float value )
+constexpr bool isIntegerPowerOfBase( const float value )
 {
-  int power { 1 };
-  float powerOf0p5 { oneHalfRaisedTo( power ) };
+  auto power { 1 };
+  auto powerOf0p5 { raiseBaseTo( power ) };
   while ( std::isnormal( powerOf0p5 ) ) {
     if ( powerOf0p5 == value ) {
       return true;
     }
-    powerOf0p5 = oneHalfRaisedTo( ++power );
+    powerOf0p5 = raiseBaseTo( ++power );
   }
   return false;
 }
 
-constexpr float operator"" _pip0p5( long double dividend )
+constexpr float operator"" _pip0p5( long double value )
 {
-  float dividendAsFloat { checkedConversionToFloat( dividend ) };
-  return isIntegerPowerOfOneHalf( dividendAsFloat ) ?
-    dividendAsFloat :
+  const auto valueAsFloat { checkedConversionToFloat( value ) };
+  return isIntegerPowerOfBase( valueAsFloat ) ?
+    valueAsFloat :
     throw std::logic_error( "value is not integer power of 0.5f" );
 }
 
