@@ -192,23 +192,26 @@ BOOST_AUTO_TEST_CASE( testCastingFromLongDoubleToFloat )
   BOOST_CHECK( value4 < 0.0f );
 }
 
-BOOST_AUTO_TEST_CASE( testCastingDetectionOfOverUnderFlow )
+BOOST_AUTO_TEST_CASE( testCastingDetectionOfOverflow )
 {
-  float value1 { 1.0f };
+  float value { 1.0f };
   BOOST_CHECK_THROW(
-    value1 = checkedConversionToFloat( std::numeric_limits<long double>::max() ),
+    value = checkedConversionToFloat( std::numeric_limits<long double>::max() ),
     std::logic_error );
   BOOST_CHECK_THROW(
-    value1 = checkedConversionToFloat( -std::numeric_limits<long double>::max() ),
+    value = checkedConversionToFloat( -std::numeric_limits<long double>::max() ),
     std::logic_error );
-  BOOST_CHECK_EQUAL( 1.0f, value1 );
+  BOOST_CHECK_EQUAL( 1.0f, value );
+}
 
-  float value2 { 2.0f };
+BOOST_AUTO_TEST_CASE( testCastingDetectionOfUnderflow )
+{
+  float value { 2.0f };
   BOOST_CHECK_THROW(
-    value2 = checkedConversionToFloat( std::numeric_limits<long double>::min() ),
+    value = checkedConversionToFloat( std::numeric_limits<long double>::min() ),
     std::logic_error );
   BOOST_CHECK_THROW(
-    value2 = checkedConversionToFloat( -std::numeric_limits<long double>::min() ),
+    value = checkedConversionToFloat( -std::numeric_limits<long double>::min() ),
     std::logic_error );
-  BOOST_CHECK_EQUAL( 2.0f, value2 );
+  BOOST_CHECK_EQUAL( 2.0f, value );
 }
