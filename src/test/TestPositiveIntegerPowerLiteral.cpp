@@ -171,10 +171,23 @@ BOOST_AUTO_TEST_CASE( testConstexpr )
   BOOST_CHECK( sum > 0.0f );
 }
 
+BOOST_AUTO_TEST_CASE( testDetectionOfNonNormal )
+{
+  float value127 { 1.0f };
+  BOOST_CHECK_THROW(
+    value127 = 0.000000000000000000000000000000000000005877471754111437539843682686_pip0p5,
+    std::logic_error );
+  BOOST_CHECK_EQUAL( 1.0f, value127 );
+}
+
 BOOST_AUTO_TEST_CASE( testCastingFromLongDoubleToFloat )
 {
   constexpr float value1 = checkedConversionToFloat( std::numeric_limits<float>::max() );
   BOOST_CHECK( value1 > 0.0f );
   constexpr float value2 = checkedConversionToFloat( -std::numeric_limits<float>::max() );
   BOOST_CHECK( value2 < 0.0f );
+  constexpr float value3 = checkedConversionToFloat( std::numeric_limits<float>::min() );
+  BOOST_CHECK( value3 > 0.0f );
+  constexpr float value4 = checkedConversionToFloat( -std::numeric_limits<float>::min() );
+  BOOST_CHECK( value4 < 0.0f );
 }
