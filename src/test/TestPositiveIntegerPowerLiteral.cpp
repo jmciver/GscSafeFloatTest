@@ -215,3 +215,23 @@ BOOST_AUTO_TEST_CASE( testCastingDetectionOfUnderflow )
     std::logic_error );
   BOOST_CHECK_EQUAL( 2.0f, value );
 }
+
+BOOST_AUTO_TEST_CASE( testCastingOfNanAndInf )
+{
+  BOOST_CHECK_THROW(
+    checkedConversionToFloat( std::numeric_limits<long double>::quiet_NaN() ),
+    std::logic_error );
+  BOOST_CHECK_THROW(
+    checkedConversionToFloat( std::numeric_limits<long double>::infinity() ),
+    std::logic_error );
+}
+
+BOOST_AUTO_TEST_CASE( testIntegerPowerOf0p5UsingNanAndInf )
+{
+  BOOST_CHECK_THROW(
+    integerPowerOf0p5( std::numeric_limits<float>::quiet_NaN() ),
+    std::logic_error );
+  BOOST_CHECK_THROW(
+    integerPowerOf0p5( std::numeric_limits<float>::infinity() ),
+    std::logic_error );
+}

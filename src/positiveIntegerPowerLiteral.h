@@ -38,14 +38,18 @@ constexpr bool isIntegerPowerOfBase( const float value, const float base )
   return false;
 }
 
+constexpr float integerPowerOf0p5( const float value )
+{
+  return isIntegerPowerOfBase( value, 0.5f ) ?
+    value :
+    throw std::logic_error( "value is not integer power of 0.5f" );
+}
+
 /// @brief The following literal, "_pip0p5", stands for (p)ositive (i)nteger
 ///   (p)ower of 0.5.
 constexpr float operator"" _pip0p5( const long double value )
 {
-  const auto valueAsFloat { checkedConversionToFloat( value ) };
-  return isIntegerPowerOfBase( valueAsFloat, 0.5f ) ?
-    valueAsFloat :
-    throw std::logic_error( "value is not integer power of 0.5f" );
+  return integerPowerOf0p5( checkedConversionToFloat( value ) );
 }
 
 #endif // gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
