@@ -191,3 +191,17 @@ BOOST_AUTO_TEST_CASE( testCastingFromLongDoubleToFloat )
   constexpr float value4 = checkedConversionToFloat( -std::numeric_limits<float>::min() );
   BOOST_CHECK( value4 < 0.0f );
 }
+
+BOOST_AUTO_TEST_CASE( testCastingDetectionOfOverUnderFlow )
+{
+  float value1 { 1.0f };
+  BOOST_CHECK_THROW(
+    value1 = checkedConversionToFloat( std::numeric_limits<long double>::max() ),
+    std::logic_error );
+  BOOST_CHECK_EQUAL( 1.0f, value1 );
+  float value2 { 2.0f };
+  BOOST_CHECK_THROW(
+    value2 = checkedConversionToFloat( std::numeric_limits<long double>::min() ),
+    std::logic_error );
+  BOOST_CHECK_EQUAL( 2.0f, value2 );
+}

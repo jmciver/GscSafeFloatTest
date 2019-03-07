@@ -2,14 +2,22 @@
 #define gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
 
 #include <cmath>
+#include <limits>
 #include <stdexcept>
+
+constexpr bool isInRangeOfFloat( const long double value )
+{
+  const auto absoluteValue { std::abs( value ) };
+  return
+    static_cast<long double>( std::numeric_limits<float>::max() ) >= absoluteValue &&
+    static_cast<long double>( std::numeric_limits<float>::min() ) <= absoluteValue;
+}
 
 constexpr float checkedConversionToFloat( const long double value )
 {
-  const auto valueAsFloat { static_cast<float>( value ) };
-  return std::isinf( valueAsFloat ) ?
-    throw std::logic_error( "value of type long double cannot be converted to type float" ) :
-    valueAsFloat;
+  return isInRangeOfFloat( value ) ?
+    static_cast<float>( value ) :
+    throw std::logic_error( "the value of type long double cannot be converted to type float" );
 }
 
 constexpr float power( const float base, const int exponent )
