@@ -1,5 +1,5 @@
-#ifndef gsc_boost_safeFloat_tupleUtilities_h
-#define gsc_boost_safeFloat_tupleUtilities_h
+#ifndef gscBoost_safeFloat_tupleUtilities_h
+#define gscBoost_safeFloat_tupleUtilities_h
 
 #include <boost/algorithm/string.hpp>
 
@@ -74,4 +74,4 @@ std::ostream& operator<< ( std::ostream& stream,  const std::tuple<>& tuple )
   return stream;
 }
 
-#endif // gsc_boost_safeFloat_tupleUtilities_h
+#endif // gscBoost_safeFloat_tupleUtilities_h

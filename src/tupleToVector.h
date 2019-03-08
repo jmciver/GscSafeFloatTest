@@ -1,5 +1,5 @@
-#ifndef gsc_boost_safeFloat_tupleToVector_h
-#define gsc_boost_safeFloat_tupleToVector_h
+#ifndef gscBoost_safeFloat_tupleToVector_h
+#define gscBoost_safeFloat_tupleToVector_h
 
 #include <tuple>
 #include <vector>
@@ -39,4 +39,4 @@ auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tu
   return TupleElementToVector<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
 }
 
-#endif // gsc_boost_safeFloat_tupleToVector_h
+#endif // gscBoost_safeFloat_tupleToVector_h

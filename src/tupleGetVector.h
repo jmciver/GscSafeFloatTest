@@ -1,5 +1,5 @@
-#ifndef gsc_boost_safeFloat_tupleGetVector_h
-#define gsc_boost_safeFloat_tupleGetVector_h
+#ifndef gscBoost_safeFloat_tupleGetVector_h
+#define gscBoost_safeFloat_tupleGetVector_h
 
 #include <type_traits>
 #include <tuple>
@@ -52,4 +52,4 @@ auto& getVector( std::tuple<Elements...>& tuple )
   return std::get<Index>( tuple );
 }
 
-#endif // gsc_boost_safeFloat_tupleGetVector_h
+#endif // gscBoost_safeFloat_tupleGetVector_h

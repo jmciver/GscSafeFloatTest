@@ -1,5 +1,5 @@
-#ifndef gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
-#define gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
+#ifndef gscBoost_safeFloat_positiveIntegerPowerLiteral_h
+#define gscBoost_safeFloat_positiveIntegerPowerLiteral_h
 
 #include <cmath>
 #include <limits>
@@ -42,7 +42,7 @@ constexpr float integerPowerOf0p5( const float value )
 {
   return isIntegerPowerOfBase( value, 0.5f ) ?
     value :
-    throw std::logic_error( "value is not integer power of 0.5f" );
+    throw std::logic_error( "value is not an integer power of 0.5f" );
 }
 
 /// @brief The following literal, "_pip0p5", stands for (p)ositive (i)nteger
@@ -52,4 +52,4 @@ constexpr float operator"" _pip0p5( const long double value )
   return integerPowerOf0p5( checkedConversionToFloat( value ) );
 }
 
-#endif // gsc_boost_safeFloat_positiveIntegerPowerLiteral_h
+#endif // gscBoost_safeFloat_positiveIntegerPowerLiteral_h
