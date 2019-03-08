@@ -9,6 +9,8 @@
 #include <cmath>
 #include <limits>
 
+using namespace gscBoost::safeFloat;
+
 BOOST_AUTO_TEST_CASE( testNonConstexpr )
 {
   std::feclearexcept( FE_ALL_EXCEPT );
@@ -182,52 +184,52 @@ BOOST_AUTO_TEST_CASE( testDetectionOfNonNormal )
 
 BOOST_AUTO_TEST_CASE( testCastingFromLongDoubleToFloat )
 {
-  constexpr float value1 = checkedConversionToFloat( std::numeric_limits<float>::max() );
+  constexpr float value1 = detail::checkedConversionToFloat( std::numeric_limits<float>::max() );
   BOOST_CHECK( value1 > 0.0f );
-  constexpr float value2 = checkedConversionToFloat( -std::numeric_limits<float>::max() );
+  constexpr float value2 = detail::checkedConversionToFloat( -std::numeric_limits<float>::max() );
   BOOST_CHECK( value2 < 0.0f );
-  constexpr float value3 = checkedConversionToFloat( std::numeric_limits<float>::min() );
+  constexpr float value3 = detail::checkedConversionToFloat( std::numeric_limits<float>::min() );
   BOOST_CHECK( value3 > 0.0f );
-  constexpr float value4 = checkedConversionToFloat( -std::numeric_limits<float>::min() );
+  constexpr float value4 = detail::checkedConversionToFloat( -std::numeric_limits<float>::min() );
   BOOST_CHECK( value4 < 0.0f );
 }
 
 BOOST_AUTO_TEST_CASE( testCastingDetectionOfOverflow )
 {
   BOOST_CHECK_THROW(
-    checkedConversionToFloat( std::numeric_limits<long double>::max() ),
+    detail::checkedConversionToFloat( std::numeric_limits<long double>::max() ),
     std::logic_error );
   BOOST_CHECK_THROW(
-    checkedConversionToFloat( -std::numeric_limits<long double>::max() ),
+    detail::checkedConversionToFloat( -std::numeric_limits<long double>::max() ),
     std::logic_error );
 }
 
 BOOST_AUTO_TEST_CASE( testCastingDetectionOfUnderflow )
 {
   BOOST_CHECK_THROW(
-    checkedConversionToFloat( std::numeric_limits<long double>::min() ),
+    detail::checkedConversionToFloat( std::numeric_limits<long double>::min() ),
     std::logic_error );
   BOOST_CHECK_THROW(
-    checkedConversionToFloat( -std::numeric_limits<long double>::min() ),
+    detail::checkedConversionToFloat( -std::numeric_limits<long double>::min() ),
     std::logic_error );
 }
 
 BOOST_AUTO_TEST_CASE( testCastingOfNanAndInf )
 {
   BOOST_CHECK_THROW(
-    checkedConversionToFloat( std::numeric_limits<long double>::quiet_NaN() ),
+    detail::checkedConversionToFloat( std::numeric_limits<long double>::quiet_NaN() ),
     std::logic_error );
   BOOST_CHECK_THROW(
-    checkedConversionToFloat( std::numeric_limits<long double>::infinity() ),
+    detail::checkedConversionToFloat( std::numeric_limits<long double>::infinity() ),
     std::logic_error );
 }
 
 BOOST_AUTO_TEST_CASE( testIntegerPowerOf0p5UsingNanAndInf )
 {
   BOOST_CHECK_THROW(
-    integerPowerOf0p5( std::numeric_limits<float>::quiet_NaN() ),
+    detail::integerPowerOf0p5( std::numeric_limits<float>::quiet_NaN() ),
     std::logic_error );
   BOOST_CHECK_THROW(
-    integerPowerOf0p5( std::numeric_limits<float>::infinity() ),
+    detail::integerPowerOf0p5( std::numeric_limits<float>::infinity() ),
     std::logic_error );
 }

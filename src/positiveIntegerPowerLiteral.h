@@ -5,6 +5,11 @@
 #include <limits>
 #include <stdexcept>
 
+namespace gscBoost {
+namespace safeFloat {
+
+namespace detail {
+
 constexpr bool isInRangeOfFloat( const long double value )
 {
   const auto absoluteValue { std::abs( value ) };
@@ -45,11 +50,16 @@ constexpr float integerPowerOf0p5( const float value )
     throw std::logic_error( "value is not an integer power of 0.5f" );
 }
 
+} // namespace detail
+
 /// @brief The following literal, "_pip0p5", stands for (p)ositive (i)nteger
 ///   (p)ower of 0.5.
 constexpr float operator"" _pip0p5( const long double value )
 {
-  return integerPowerOf0p5( checkedConversionToFloat( value ) );
+  return detail::integerPowerOf0p5( detail::checkedConversionToFloat( value ) );
 }
+
+} // namespace safeFloat
+} // namespace gscBoost
 
 #endif // gscBoost_safeFloat_positiveIntegerPowerLiteral_h
