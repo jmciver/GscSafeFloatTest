@@ -11,6 +11,11 @@
 
 using namespace gscBoost::safeFloat;
 
+constexpr long double upConvert( const float value )
+{
+  return static_cast<long double>( value );
+}
+
 BOOST_AUTO_TEST_CASE( testNonConstexpr )
 {
   std::feclearexcept( FE_ALL_EXCEPT );
@@ -184,13 +189,13 @@ BOOST_AUTO_TEST_CASE( testDetectionOfNonNormal )
 
 BOOST_AUTO_TEST_CASE( testCastingFromLongDoubleToFloat )
 {
-  constexpr float value1 = detail::checkedConversionToFloat( std::numeric_limits<float>::max() );
+  constexpr float value1 = detail::checkedConversionToFloat( upConvert( std::numeric_limits<float>::max() ) );
   BOOST_CHECK( value1 > 0.0f );
-  constexpr float value2 = detail::checkedConversionToFloat( -std::numeric_limits<float>::max() );
+  constexpr float value2 = detail::checkedConversionToFloat( upConvert( -std::numeric_limits<float>::max() ) );
   BOOST_CHECK( value2 < 0.0f );
-  constexpr float value3 = detail::checkedConversionToFloat( std::numeric_limits<float>::min() );
+  constexpr float value3 = detail::checkedConversionToFloat( upConvert( std::numeric_limits<float>::min() ) );
   BOOST_CHECK( value3 > 0.0f );
-  constexpr float value4 = detail::checkedConversionToFloat( -std::numeric_limits<float>::min() );
+  constexpr float value4 = detail::checkedConversionToFloat( upConvert( -std::numeric_limits<float>::min() ) );
   BOOST_CHECK( value4 < 0.0f );
 }
 
