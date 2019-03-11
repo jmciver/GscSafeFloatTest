@@ -4,6 +4,11 @@
 #include <tuple>
 #include <vector>
 
+namespace gscBoost {
+namespace safeFloat {
+
+namespace detail {
+
 template <class Tuple, std::size_t N>
 struct TupleElementToVectorImpl
 {
@@ -33,10 +38,15 @@ struct TupleElementToVectorImpl<Tuple, 0>
   }
 };
 
+} // namespace detail
+
 template <class... Elements>
 auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tuple )
 {
-  return TupleElementToVectorImpl<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
+  return detail::TupleElementToVectorImpl<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
 }
+
+} // namespace safeFloat
+} // namespace gscBoost
 
 #endif // gsc_boost_safeFloat_tupleToVector_h

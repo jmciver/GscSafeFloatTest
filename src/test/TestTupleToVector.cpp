@@ -9,6 +9,8 @@
 
 #include <tuple>
 
+using namespace gscBoost::safeFloat;
+
 BOOST_AUTO_TEST_CASE( testZeroElement )
 {
   const std::string expectedValue { "{}" };

@@ -8,6 +8,8 @@
 
 #include <test/testHelpers.h>
 
+using namespace gscBoost::safeFloat;
+
 BOOST_AUTO_TEST_CASE( tupleOfTwoElementVectors )
 {
   auto testTuple { toTupleOfVectors( 2, std::make_tuple( "one", 2 ) ) };
