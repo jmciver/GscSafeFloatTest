@@ -5,18 +5,18 @@
 #include <vector>
 
 template <class Tuple, std::size_t N>
-struct TupleElementToVector
+struct TupleElementToVectorImpl
 {
   static auto build( const std::size_t size, const Tuple& tuple )
   {
     return std::tuple_cat(
-      TupleElementToVector<Tuple, N-1>::build( size, tuple ),
+      TupleElementToVectorImpl<Tuple, N-1>::build( size, tuple ),
       std::make_tuple( std::vector( size, std::get<N-1>( tuple ) ) ) );
   }
 };
 
 template <class Tuple>
-struct TupleElementToVector<Tuple, 1>
+struct TupleElementToVectorImpl<Tuple, 1>
 {
   static auto build( const std::size_t size, const Tuple& tuple )
   {
@@ -25,7 +25,7 @@ struct TupleElementToVector<Tuple, 1>
 };
 
 template <class Tuple>
-struct TupleElementToVector<Tuple, 0>
+struct TupleElementToVectorImpl<Tuple, 0>
 {
   static auto build( const std::size_t, const Tuple& )
   {
@@ -36,7 +36,7 @@ struct TupleElementToVector<Tuple, 0>
 template <class... Elements>
 auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tuple )
 {
-  return TupleElementToVector<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
+  return TupleElementToVectorImpl<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
 }
 
 #endif // gsc_boost_safeFloat_tupleToVector_h
