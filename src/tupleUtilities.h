@@ -59,19 +59,11 @@ struct TuplePrinter<Tuple, 0>
   }
 };
 
-template <class... Args>
-std::ostream& operator<< ( std::ostream& stream,  const std::tuple<Args...>& tuple )
+template <class... Elements>
+std::ostream& operator<< ( std::ostream& stream,  const std::tuple<Elements...>& tuple )
 {
   stream << "{";
-  TuplePrinter<decltype( tuple ), sizeof...(Args)>::print( stream, tuple );
-  stream << "}";
-  return stream;
-}
-
-std::ostream& operator<< ( std::ostream& stream,  const std::tuple<>& tuple )
-{
-  stream << "{";
-  TuplePrinter<decltype( tuple ), 0>::print( stream, tuple );
+  TuplePrinter<decltype( tuple ), sizeof...( Elements )>::print( stream, tuple );
   stream << "}";
   return stream;
 }
