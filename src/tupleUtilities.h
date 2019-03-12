@@ -5,7 +5,9 @@
 
 #include <ostream>
 #include <sstream>
+#include <string>
 #include <tuple>
+#include <vector>
 
 template <class T>
 std::string convertVectorToString( const std::vector< T >& vector )
