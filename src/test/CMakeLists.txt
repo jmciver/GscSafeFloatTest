@@ -9,6 +9,7 @@ function(simpleTest name)
   add_test(NAME "${name}" COMMAND "${name}")
 endfunction()
 
+simpleTest("TestPositiveIntegerPowerLiteral")
 simpleTest("TestTupleToVector")
 simpleTest("TestTupleUtilities")
 simpleTest("TestTupleGetVector")

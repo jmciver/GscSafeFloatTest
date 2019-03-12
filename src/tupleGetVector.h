@@ -1,9 +1,14 @@
-#ifndef gsc_boost_safeFloat_tupleGetVector_h
-#define gsc_boost_safeFloat_tupleGetVector_h
+#ifndef gscBoost_safeFloat_tupleGetVector_h
+#define gscBoost_safeFloat_tupleGetVector_h
 
 #include <type_traits>
 #include <tuple>
 #include <vector>
+
+namespace gscBoost {
+namespace safeFloat {
+
+namespace detail {
 
 template <class T>
 struct IsVectorType
@@ -42,14 +47,19 @@ struct CheckTupleOfVectorsImpl<1>
   }
 };
 
+} // namespace detail
+
 template <std::size_t Index, class... Elements>
 auto& getVector( std::tuple<Elements...>& tuple )
 {
   static_assert(
     sizeof... ( Elements ) > 0,
     "attempting to call getVector using empty tuple" );
-  CheckTupleOfVectorsImpl<sizeof... ( Elements )>::apply( tuple );
+  detail::CheckTupleOfVectorsImpl<sizeof... ( Elements )>::apply( tuple );
   return std::get<Index>( tuple );
 }
 
-#endif // gsc_boost_safeFloat_tupleGetVector_h
+} // namespace safeFloat
+} // namespace gscBoost
+
+#endif // gscBoost_safeFloat_tupleGetVector_h
