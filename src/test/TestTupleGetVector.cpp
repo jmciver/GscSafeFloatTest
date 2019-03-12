@@ -27,15 +27,3 @@ BOOST_AUTO_TEST_CASE( tupleOfOneElementVectors )
   element[1] = 4;
   BOOST_CHECK( "{{1, 4}}" == testTuple );
 }
-
-//BOOST_AUTO_TEST_CASE( tupleCheckTest )
-//{
-//  auto testTuple { std::make_tuple( std::vector<int>({1}), std::vector<int>({2}), 3 ) };
-//  auto& element { getVector<0>( testTuple ) };
-//}
-
-//BOOST_AUTO_TEST_CASE( emptyTupleTest )
-//{
-//  auto testTuple { std::make_tuple() };
-//  auto& element { getVector<0>( testTuple ) };
-//}
