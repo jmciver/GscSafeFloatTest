@@ -6,19 +6,12 @@
 #include <tuple>
 #include <sstream>
 
-template <class... Args>
-bool operator== ( const std::string& lhs, const std::tuple<Args...>& rhs )
+template <class... Elements>
+bool operator== ( const std::string& lhs, const std::tuple<Elements...>& rhs )
 {
   std::ostringstream stream;
   stream << rhs;
   return lhs.compare( stream.str() ) == 0 ? true : false;
-}
-
-bool operator== ( const std::string& lhs, const std::tuple<>& rhs )
-{
-  std::ostringstream stream;
-  stream << rhs;
-  return lhs.compare(stream.str()) == 0 ? true : false;
 }
 
 #endif // #ifndef gscBoost_safeFloat_test_testHelpers_h
