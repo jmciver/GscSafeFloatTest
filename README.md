@@ -1,9 +1,9 @@
-# Google Summer of Code SafeFloat Code Competancy Submission
+# Google Summer of Code 2019: Boost.SafeFloat Code Competancy Submission
 
 | General Information        |                                                    |
 |----------------------------|----------------------------------------------------|
 |Author                      | John K. McIver III                                 |
-|Author's Institution e-mail | mciverj@unm.edu                                    |
+|Author's institution e-mail | mciverj@unm.edu                                    |
 |Degree being persued        | M.S. Computer Science                              |
 |Associated university       | University of New Mexico                           |
 |Location                    | Albuquerque, New Mexico (United States of America) |
@@ -40,6 +40,3 @@ Run tests:
 ```shell
 ctest
 ```
-
-
-
