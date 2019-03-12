@@ -1,5 +1,5 @@
-#ifndef gsc_boost_safeFloat_test_testHelpers_h
-#define gsc_boost_safeFloat_test_testHelpers_h
+#ifndef gscBoost_safeFloat_test_testHelpers_h
+#define gscBoost_safeFloat_test_testHelpers_h
 
 #include <tupleUtilities.h>
 
@@ -21,4 +21,4 @@ bool operator== ( const std::string& lhs, const std::tuple<>& rhs )
   return lhs.compare(stream.str()) == 0 ? true : false;
 }
 
-#endif // #ifndef gsc_boost_safeFloat_test_testHelpers_h
+#endif // #ifndef gscBoost_safeFloat_test_testHelpers_h
