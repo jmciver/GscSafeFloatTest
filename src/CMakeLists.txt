@@ -10,7 +10,15 @@ endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-set(${PROJECT_NAME}_HEADERS} "tupleToVector.h")
+set(${PROJECT_NAME}_HEADERS
+  "positiveIntegerPowerLiteral.h"
+  "tupleGetVector.h"
+  "tupleToVector.h"
+  "tupleUtilities.h" )
+
+# The following custom target is used to provide inclusion of headers into an
+# IDE project and thus produces no tangible compilation objects.
+add_custom_target(${PROJECT_NAME} SOURCES ${${PROJECT_NAME}_HEADERS})
 
 if (TESTING)
   add_subdirectory("test")
