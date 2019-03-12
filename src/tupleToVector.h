@@ -40,6 +40,7 @@ struct TupleElementToVectorImpl<Tuple, 0>
 
 } // namespace detail
 
+/// @brief Implementation of programming competency test 2 of 3.
 template <class... Elements>
 auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tuple )
 {

@@ -52,8 +52,8 @@ constexpr float integerPowerOf0p5( const float value )
 
 } // namespace detail
 
-/// @brief The following literal, "_pip0p5", stands for (p)ositive (i)nteger
-///   (p)ower of 0.5.
+/// @brief Implementation of programming competency test 1 of 3. The following
+/// literal, "_pip0p5", stands for (p)ositive (i)nteger (p)ower of 0.5.
 constexpr float operator"" _pip0p5( const long double value )
 {
   return detail::integerPowerOf0p5( detail::checkedConversionToFloat( value ) );

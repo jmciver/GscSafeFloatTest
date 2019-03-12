@@ -49,6 +49,7 @@ struct CheckTupleOfVectorsImpl<1>
 
 } // namespace detail
 
+/// @brief Implementation of programming competency test 3 of 3.
 template <std::size_t Index, class... Elements>
 auto& getVector( std::tuple<Elements...>& tuple )
 {
