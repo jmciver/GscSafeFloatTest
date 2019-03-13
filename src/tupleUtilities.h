@@ -9,6 +9,11 @@
 #include <tuple>
 #include <vector>
 
+namespace gscBoost {
+namespace safeFloat {
+
+namespace detail {
+
 template <class T>
 std::string convertVectorToString( const std::vector< T >& vector )
 {
@@ -24,25 +29,18 @@ std::string convertVectorToString( const std::vector< T >& vector )
   return boost::algorithm::join( vectorAsStrings, ", " );
 }
 
-template <class T>
-std::ostream& operator<< ( std::ostream& stream, const std::vector< T >& vector )
-{
-  stream << "{" << convertVectorToString( vector ) << "}";
-  return stream;
-}
-
 template <class Tuple, std::size_t N>
-struct TuplePrinter
+struct TuplePrinterImpl
 {
   static void print( std::ostream& stream, const Tuple& tuple )
   {
-    TuplePrinter<Tuple, N-1>::print( stream, tuple );
+    TuplePrinterImpl<Tuple, N-1>::print( stream, tuple );
     stream << ", " << std::get<N-1>( tuple );
   }
 };
 
 template <class Tuple>
-struct TuplePrinter<Tuple, 1>
+struct TuplePrinterImpl<Tuple, 1>
 {
   static void print( std::ostream& stream, const Tuple& tuple )
   {
@@ -51,7 +49,7 @@ struct TuplePrinter<Tuple, 1>
 };
 
 template <class Tuple>
-struct TuplePrinter<Tuple, 0>
+struct TuplePrinterImpl<Tuple, 0>
 {
   static void print( std::ostream&, const Tuple& )
   {
@@ -59,13 +57,25 @@ struct TuplePrinter<Tuple, 0>
   }
 };
 
+} // namespace detail
+
+template <class T>
+std::ostream& operator<< ( std::ostream& stream, const std::vector< T >& vector )
+{
+  stream << "{" << detail::convertVectorToString( vector ) << "}";
+  return stream;
+}
+
 template <class... Elements>
 std::ostream& operator<< ( std::ostream& stream,  const std::tuple<Elements...>& tuple )
 {
   stream << "{";
-  TuplePrinter<decltype( tuple ), sizeof...( Elements )>::print( stream, tuple );
+  detail::TuplePrinterImpl<decltype( tuple ), sizeof...( Elements )>::print( stream, tuple );
   stream << "}";
   return stream;
 }
+
+} // namespace safeFlost
+} // namespace gscBoost
 
 #endif // gscBoost_safeFloat_tupleUtilities_h

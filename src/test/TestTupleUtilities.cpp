@@ -7,6 +7,8 @@
 
 #include <tuple>
 
+using namespace gscBoost::safeFloat;
+
 BOOST_AUTO_TEST_CASE( testPrintEmpty )
 {
   const std::tuple<> empty;
