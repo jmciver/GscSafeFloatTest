@@ -30,17 +30,17 @@ std::string convertVectorToString( const std::vector< T >& vector )
 }
 
 template <class Tuple, std::size_t N>
-struct TuplePrinterImpl
+struct TuplePrinter
 {
   static void print( std::ostream& stream, const Tuple& tuple )
   {
-    TuplePrinterImpl<Tuple, N-1>::print( stream, tuple );
+    TuplePrinter<Tuple, N-1>::print( stream, tuple );
     stream << ", " << std::get<N-1>( tuple );
   }
 };
 
 template <class Tuple>
-struct TuplePrinterImpl<Tuple, 1>
+struct TuplePrinter<Tuple, 1>
 {
   static void print( std::ostream& stream, const Tuple& tuple )
   {
@@ -49,7 +49,7 @@ struct TuplePrinterImpl<Tuple, 1>
 };
 
 template <class Tuple>
-struct TuplePrinterImpl<Tuple, 0>
+struct TuplePrinter<Tuple, 0>
 {
   static void print( std::ostream&, const Tuple& )
   {
@@ -70,7 +70,7 @@ template <class... Elements>
 std::ostream& operator<< ( std::ostream& stream,  const std::tuple<Elements...>& tuple )
 {
   stream << "{";
-  detail::TuplePrinterImpl<decltype( tuple ), sizeof...( Elements )>::print( stream, tuple );
+  detail::TuplePrinter<decltype( tuple ), sizeof...( Elements )>::print( stream, tuple );
   stream << "}";
   return stream;
 }

@@ -23,7 +23,7 @@ struct IsVectorType<std::vector<T>>
 };
 
 template <std::size_t Index>
-struct CheckTupleOfVectorsImpl
+struct CheckTupleOfVectors
 {
   template <class... Elements>
   static void apply( const std::tuple<Elements...>& tuple )
@@ -31,12 +31,12 @@ struct CheckTupleOfVectorsImpl
     static_assert(
       IsVectorType<typename std::tuple_element<Index - 1, std::tuple<Elements...>>::type>::value::value,
       "attempting to call getVector on tuple with non-vector type" );
-    CheckTupleOfVectorsImpl<Index - 1>::apply( tuple );
+    CheckTupleOfVectors<Index - 1>::apply( tuple );
   }
 };
 
 template <>
-struct CheckTupleOfVectorsImpl<1>
+struct CheckTupleOfVectors<1>
 {
   template <class... Elements>
   static void apply( const std::tuple<Elements...>& )
@@ -56,7 +56,7 @@ auto& getVector( std::tuple<Elements...>& tuple )
   static_assert(
     sizeof... ( Elements ) > 0,
     "attempting to call getVector using empty tuple" );
-  detail::CheckTupleOfVectorsImpl<sizeof... ( Elements )>::apply( tuple );
+  detail::CheckTupleOfVectors<sizeof...( Elements )>::apply( tuple );
   return std::get<Index>( tuple );
 }
 

@@ -10,18 +10,18 @@ namespace safeFloat {
 namespace detail {
 
 template <class Tuple, std::size_t N>
-struct TupleElementToVectorImpl
+struct TupleElementToVector
 {
   static auto build( const std::size_t size, const Tuple& tuple )
   {
     return std::tuple_cat(
-      TupleElementToVectorImpl<Tuple, N-1>::build( size, tuple ),
+      TupleElementToVector<Tuple, N-1>::build( size, tuple ),
       std::make_tuple( std::vector( size, std::get<N-1>( tuple ) ) ) );
   }
 };
 
 template <class Tuple>
-struct TupleElementToVectorImpl<Tuple, 1>
+struct TupleElementToVector<Tuple, 1>
 {
   static auto build( const std::size_t size, const Tuple& tuple )
   {
@@ -30,7 +30,7 @@ struct TupleElementToVectorImpl<Tuple, 1>
 };
 
 template <class Tuple>
-struct TupleElementToVectorImpl<Tuple, 0>
+struct TupleElementToVector<Tuple, 0>
 {
   static auto build( const std::size_t, const Tuple& )
   {
@@ -44,7 +44,7 @@ struct TupleElementToVectorImpl<Tuple, 0>
 template <class... Elements>
 auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tuple )
 {
-  return detail::TupleElementToVectorImpl<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
+  return detail::TupleElementToVector<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
 }
 
 } // namespace safeFloat
