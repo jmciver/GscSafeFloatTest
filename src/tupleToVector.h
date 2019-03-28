@@ -1,3 +1,5 @@
+// File: tupleToVector.h
+// Description: Implementation of programming competency test 2 of 3.
 #ifndef gscBoost_safeFloat_tupleToVector_h
 #define gscBoost_safeFloat_tupleToVector_h
 
@@ -42,9 +44,12 @@ struct TupleElementToVector<Tuple, 0>
 
 /// @brief Implementation of programming competency test 2 of 3.
 template <class... Elements>
-auto toTupleOfVectors( const std::size_t size, const std::tuple<Elements...>& tuple )
+auto toTupleOfVectors(
+  const std::size_t size,
+  const std::tuple<Elements...>& tuple )
 {
-  return detail::TupleElementToVector<decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
+  return detail::TupleElementToVector<
+    decltype( tuple ), sizeof... ( Elements )>::build( size, tuple );
 }
 
 } // namespace safeFloat
