@@ -15,7 +15,7 @@ namespace detail {
 
 constexpr bool isInRangeOfFloat( const long double value )
 {
-  const auto absoluteValue { std::abs( value ) };
+  const auto absoluteValue { value < 0.0 ? value * -1 : value };
   return
     static_cast<long double>( std::numeric_limits<float>::max() ) >=
     absoluteValue &&
@@ -34,7 +34,7 @@ constexpr float checkedConversionToFloat( const long double value )
 
 constexpr float power( const float base, const int exponent )
 {
-  return std::pow( base, static_cast<float>( exponent ) );
+  return exponent == 0 ? 1 : base * power(base, exponent - 1);
 }
 
 constexpr bool isIntegerPowerOfBase(
