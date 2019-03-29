@@ -15,7 +15,11 @@ namespace detail {
 
 constexpr bool isInRangeOfFloat( const long double value )
 {
-  const auto absoluteValue { value < 0.0 ? value * -1 : value };
+#if defined(_MSC_VER)
+  const auto absoluteValue { value < 0 ? -value : value };
+#else
+  const auto absoluteValue { std::abs( value ) };
+#endif
   return
     static_cast<long double>( std::numeric_limits<float>::max() ) >=
     absoluteValue &&
@@ -34,7 +38,12 @@ constexpr float checkedConversionToFloat( const long double value )
 
 constexpr float power( const float base, const int exponent )
 {
-  return exponent == 0 ? 1 : base * power(base, exponent - 1);
+#if defined(_MSC_VER)
+  // std::pow cannot be used in MSVC 14.1 as it is not delimited as constexpr.
+  return exponent == 0 ? 1.0f : base * power(base, exponent - 1);
+#else
+  return std::pow( base, static_cast<float>( exponent ) );
+#endif
 }
 
 constexpr bool isIntegerPowerOfBase(
