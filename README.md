@@ -10,9 +10,9 @@
 
 ## Requirements
 
-* C++17 enabled compiler
+* C++17 enabled compiler (tested using g++ 8.3.1 or MSVC 15.9.7)
 * CMake at or above v3.12
-* Boost libraries (used for unittesting)
+* Boost libraries (tested using 1.69.0)
 
 Testing of the code was performed using G++ 8.3.1.
 
