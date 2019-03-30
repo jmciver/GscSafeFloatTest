@@ -52,7 +52,11 @@ constexpr bool isIntegerPowerOfBase(
 {
   auto exponent { 1 };
   auto result { power( base, exponent ) };
-  while ( std::isnormal( result ) ) {
+#if defined(_MSC_VER)
+  for( int i = 0; i < 127; ++i ) {
+#else
+  while (std::isnormal(result)) {
+#endif
     if ( result == value ) {
       return true;
     }
