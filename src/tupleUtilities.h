@@ -1,3 +1,4 @@
+// Description: Implementation of operator << for tuples and vectors.
 #ifndef gscBoost_safeFloat_tupleUtilities_h
 #define gscBoost_safeFloat_tupleUtilities_h
 
@@ -60,14 +61,18 @@ struct TuplePrinter<Tuple, 0>
 } // namespace detail
 
 template <class T>
-std::ostream& operator<< ( std::ostream& stream, const std::vector< T >& vector )
+std::ostream& operator<< (
+  std::ostream& stream,
+  const std::vector< T >& vector )
 {
   stream << "{" << detail::convertVectorToString( vector ) << "}";
   return stream;
 }
 
 template <class... Elements>
-std::ostream& operator<< ( std::ostream& stream,  const std::tuple<Elements...>& tuple )
+std::ostream& operator<< (
+  std::ostream& stream,
+  const std::tuple<Elements...>& tuple )
 {
   stream << "{";
   detail::TuplePrinter<decltype( tuple ), sizeof...( Elements )>::print( stream, tuple );
