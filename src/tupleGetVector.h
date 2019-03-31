@@ -1,3 +1,5 @@
+// File: tupleGetVector.h
+// Description: Implementation of programming competency test 3 of 3.
 #ifndef gscBoost_safeFloat_tupleGetVector_h
 #define gscBoost_safeFloat_tupleGetVector_h
 
@@ -29,7 +31,8 @@ struct CheckTupleOfVectors
   static void apply( const std::tuple<Elements...>& tuple )
   {
     static_assert(
-      IsVectorType<typename std::tuple_element<Index - 1, std::tuple<Elements...>>::type>::value::value,
+      IsVectorType<typename std::tuple_element<
+        Index - 1, std::tuple<Elements...>>::type>::value::value,
       "attempting to call getVector on tuple with non-vector type" );
     CheckTupleOfVectors<Index - 1>::apply( tuple );
   }
@@ -42,7 +45,9 @@ struct CheckTupleOfVectors<1>
   static void apply( const std::tuple<Elements...>& )
   {
     static_assert(
-      IsVectorType<typename std::tuple_element<0, std::tuple<Elements...>>::type>::value::value,
+      IsVectorType<
+        typename std::tuple_element<
+          0, std::tuple<Elements...>>::type>::value::value,
       "attempting to call getVector on tuple with non-vector type" );
   }
 };
@@ -54,7 +59,7 @@ template <std::size_t Index, class... Elements>
 auto& getVector( std::tuple<Elements...>& tuple )
 {
   static_assert(
-    sizeof... ( Elements ) > 0,
+    sizeof...( Elements ) > 0,
     "attempting to call getVector using empty tuple" );
   detail::CheckTupleOfVectors<sizeof...( Elements )>::apply( tuple );
   return std::get<Index>( tuple );

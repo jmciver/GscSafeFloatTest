@@ -1,7 +1,7 @@
 find_package( Boost REQUIRED unit_test_framework )
 
 function(simpleTest name)
-  include_directories(${BOOST_INCLUDE_DIRS})
+  include_directories(${Boost_INCLUDE_DIRS})
 
   add_executable(${name} testHelpers.h "${name}.cpp")
   target_link_libraries(${name} ${Boost_LIBRARIES})
