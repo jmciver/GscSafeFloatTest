@@ -1,4 +1,4 @@
-# Google Summer of Code 2019: Boost.SafeFloat Code Competancy Submission
+# Google Summer of Code 2019: Boost.SafeFloat Code Competency Submission
 
 | General Information        |                                                    |
 |----------------------------|----------------------------------------------------|
@@ -21,7 +21,7 @@ Testing of the code was performed using G++ 8.3.1.
 Clone the respository:
 
 ```shell
-git clone git clone https://jkmciver@bitbucket.org/jkmciver/gscsafefloattest.git jmciverGscSafeFloat
+git clone https://github.com/jmciver/GscSafeFloatTest.git jmciverGscSafeFloat
 ```
 
 Make the build directory:
